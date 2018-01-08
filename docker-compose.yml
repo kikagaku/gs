@@ -1,0 +1,49 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      TZ: Asia/Tokyo
+
+  app:
+    build:
+      context: ./rails
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./rails:/var/www/web
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "3000:3000"
+    links:
+      - db:db
+      - api:api
+
+  web:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./rails:/var/www/web
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "80:80"
+    links:
+      - app
+
+  api:
+    build:
+      context: ./flask
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    volumes :
+      - ./flask:/home
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "5000:5000"
