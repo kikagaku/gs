@@ -12,8 +12,8 @@ RUN mkdir -p $RAILS_ROOT
 WORKDIR $RAILS_ROOT
 
 # Gems:
-COPY rails/Gemfile Gemfile
-COPY rails/Gemfile.lock Gemfile.lock
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
 RUN gem install bundler
 RUN bundle install
 
