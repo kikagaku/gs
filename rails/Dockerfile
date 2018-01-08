@@ -18,7 +18,7 @@ RUN gem install bundler
 RUN bundle install
 
 # Copy the main application.
-COPY ./rails .
+COPY ./ .
 
 EXPOSE 3000
 
