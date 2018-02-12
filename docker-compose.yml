@@ -24,8 +24,8 @@ services:
 
   web:
     build:
-      context: ./nginx
-      dockerfile: Dockerfile
+      context: ./rails
+      dockerfile: Dockerfile-Nginx
     volumes:
       - ./rails:/var/www/web
     environment:
